@@ -44,18 +44,35 @@ module base_plate()
 
 module holes()
 {
-	translate([6,15,0])
-	{
 		translate([0,0,-1]) cylinder(7, 1.7, 1.7);
-		translate([25.4,0,-1]) cylinder(7, 1.7, 1.7);
+		translate([26,0,-1]) cylinder(7, 1.7, 1.7);
+}
+
+module vblock()
+{
+	difference()
+	{
+		cube([15, 43, 6.5]);
+		translate ([7.5, -1, 1]) rotate([0,-40,0]) cube([20,47,20]);
+		translate ([7.5, -1, 1]) rotate([0,-50,0]) cube([20,47,20]);
 	}
 }
 
-difference()
+module taz_pen_mount()
 {
-	base_plate();
-	holes();
+	difference()
+	{
+		union()
+		{
+			base_plate();
+			translate([11.2,1,5]) vblock();
+		}
+		translate([6,15,0]) holes();
+	}
 }
+
+taz_pen_mount();
+
 
 
 
